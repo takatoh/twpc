@@ -1,6 +1,7 @@
 import tweepy
 import json
 import os
+import requests
 import argparse
 from pprint import pprint
 from get_tweeted_photo import __version__
@@ -34,6 +35,11 @@ def main():
                 expanded_url = media['expanded_url']
                 print(f'  media url: {media_url}')
                 print(f'  expanded url: {expanded_url}')
+                if args.download:
+                    res = requests.get(media_url)
+                    file_name = os.path.join(args.download, media_url.split('/')[-1])
+                    with open(file_name, 'wb') as f:
+                        f.write(res.content)
         exit(0)
 
 
@@ -50,6 +56,13 @@ def parse_arguments():
         type=int,
         metavar='TWEET_ID',
         help='specify tweet ID'
+    )
+    parser.add_argument(
+        '-d', '--download',
+        action='store',
+        metavar='DIR',
+        default='.',
+        help='download photos into DIR'
     )
     args = parser.parse_args()
     return args
