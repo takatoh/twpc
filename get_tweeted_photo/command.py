@@ -20,18 +20,19 @@ def main():
 
     if args.id:
         status =api.get_status(args.id)
-        for k, v in status._json.items():
-            print(k)
-        if 'media' not in status.entities:
+        if 'extended_entities' in status._json and 'media' in status._json['extended_entities']:
+            entities = status._json['extended_entities']
+        elif 'entities' in status._json and 'media' in status._json['entities']:
+            entities = status._json['entities']
+        else:
             print('No media')
             exit(0)
         print(f'@{status.user.screen_name} at {status.created_at}(id={status.id})')
-        print(len(status._json['extended_entities']['media']))
-        for media in status._json['extended_entities']['media']:
+        for media in entities['media']:
             if media['type'] == 'photo':
                 media_url = media['media_url_https']
                 expanded_url = media['expanded_url']
-                print(f'  media: {media_url}')
+                print(f'  media url: {media_url}')
                 print(f'  expanded url: {expanded_url}')
         exit(0)
 
