@@ -6,7 +6,7 @@ import argparse
 from pprint import pprint
 from get_tweeted_photo import __version__
 
-SCRIPT_VERSION = __version__
+SCRIPT_VERSION = f'v{__version__}'
 CONFIG_FILE_NAME = '.tweepy_config.json'
 
 
