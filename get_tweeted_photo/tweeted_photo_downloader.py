@@ -21,13 +21,14 @@ class TweetedPhotoDownloader():
 
     def download_all(self, dir):
         count = 0
-        for photo in self.result['photos']:
-            media_url = photo['media_url']
-            res = requests.get(media_url)
-            file_name = os.path.join(dir, media_url.split('/')[-1])
-            with open(file_name, 'wb') as f:
-                f.write(res.content)
-            count += 1
+        for tweet in self.result:
+            for photo in tweet['photos']:
+                media_url = photo['media_url']
+                res = requests.get(media_url)
+                file_name = os.path.join(dir, media_url.split('/')[-1])
+                with open(file_name, 'wb') as f:
+                    f.write(res.content)
+                count += 1
         return count
 
     def _pick_out(self, status):
