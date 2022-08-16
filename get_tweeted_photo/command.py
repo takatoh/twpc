@@ -42,12 +42,12 @@ def main():
                     h = v['h']
                     resize = v['resize']
                     print(f'    {k}: {w}x{h} ({resize})')
-            if args.download:
-                res = requests.get(media_url)
-                os.makedirs(args.download, exist_ok=True)
-                file_name = os.path.join(args.download, media_url.split('/')[-1])
-                with open(file_name, 'wb') as f:
-                    f.write(res.content)
+        if args.download:
+            download_dir = args.download
+            os.makedirs(download_dir, exist_ok=True)
+            count = downloader.download_all(download_dir)
+            print(f'{count} photos downloaded')
+
         exit(0)
 
 
