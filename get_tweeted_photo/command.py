@@ -35,6 +35,12 @@ def main():
                 expanded_url = media['expanded_url']
                 print(f'  media url: {media_url}')
                 print(f'  expanded url: {expanded_url}')
+                if args.size:
+                    for k, v in media['sizes'].items():
+                        w = v['w']
+                        h = v['h']
+                        resize = v['resize']
+                        print(f'    {k}: {w}x{h} ({resize})')
                 if args.download:
                     res = requests.get(media_url)
                     os.makedirs(args.download, exist_ok=True)
@@ -64,6 +70,11 @@ def parse_arguments():
         metavar='DIR',
         default='.',
         help='download photos into DIR'
+    )
+    parser.add_argument(
+        '-s', '--size',
+        action='store_true',
+        help='display photo sizes'
     )
     args = parser.parse_args()
     return args
