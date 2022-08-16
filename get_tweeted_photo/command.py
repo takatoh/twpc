@@ -28,8 +28,7 @@ def main():
         screen_name, created_at, tweet_id = result['screen_name'], result['created_at'], result['id']
         print(f'@{screen_name} at {created_at}(id={tweet_id}')
         for photo in result['photos']:
-            media_url = photo['media_url']
-            expanded_url = photo['expanded_url']
+            media_url, expanded_url = photo['media_url'], photo['expanded_url']
             print(f'  media url: {media_url}')
             print(f'  expanded url: {expanded_url}')
             if args.size:
