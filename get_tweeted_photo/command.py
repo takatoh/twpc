@@ -25,7 +25,7 @@ def main():
         if result is None:
             print('No media')
             exit(0)
-        print_tweet(result[0])
+        print_tweet(result[0], args.size)
         if args.download:
             download_dir = args.download
             os.makedirs(download_dir, exist_ok=True)
@@ -71,14 +71,14 @@ def load_config():
         config = json.load(f)
     return config
 
-def print_tweet(tweet):
+def print_tweet(tweet, size=False):
     screen_name, created_at, tweet_id = tweet['screen_name'], tweet['created_at'], tweet['id']
     print(f'@{screen_name} at {created_at}(id={tweet_id}')
     for photo in tweet['photos']:
         media_url, expanded_url = photo['media_url'], photo['expanded_url']
         print(f'  media url: {media_url}')
         print(f'  expanded url: {expanded_url}')
-        if args.size:
+        if size:
             for k, v in photo['sizes'].items():
                 w, h, resize = v['w'], v['h'], v['resize']
                 print(f'    {k}: {w}x{h} ({resize})')
