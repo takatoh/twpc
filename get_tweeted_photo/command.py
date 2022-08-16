@@ -69,7 +69,7 @@ def parse_arguments():
         '-d', '--download',
         action='store',
         metavar='DIR',
-        default='.',
+        default=None,
         help='download photos into DIR'
     )
     parser.add_argument(
