@@ -19,7 +19,8 @@ class TweetedPhotoDownloader():
             entities = status._json['entities']
         else:
             return self.result
-        self.result = {
+        self.result = []
+        tweet = {
             'screen_name' : status.user.screen_name,
             'created_at' : status.created_at,
             'id' : status.id,
@@ -34,11 +35,12 @@ class TweetedPhotoDownloader():
                         'h' : v['h'],
                         'resize' : v['resize']
                     }
-                self.result['photos'].append({
+                tweet['photos'].append({
                     'media_url' : media['media_url_https'],
                     'expanded_url' : media['expanded_url'],
                     'sizes' : sizes
                 })
+        self.result.append(tweet)
         return self.result
 
     def download_all(self, dir):
