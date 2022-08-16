@@ -80,3 +80,15 @@ def load_config():
     with open(config_file, 'r') as f:
         config = json.load(f)
     return config
+
+def print_tweet(tweet):
+    screen_name, created_at, tweet_id = tweet['screen_name'], tweet['created_at'], tweet['id']
+    print(f'@{screen_name} at {created_at}(id={tweet_id}')
+    for photo in tweet['photos']:
+        media_url, expanded_url = photo['media_url'], photo['expanded_url']
+        print(f'  media url: {media_url}')
+        print(f'  expanded url: {expanded_url}')
+        if args.size:
+            for k, v in photo['sizes'].items():
+                w, h, resize = v['w'], v['h'], v['resize']
+                print(f'    {k}: {w}x{h} ({resize})')
