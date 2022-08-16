@@ -36,22 +36,6 @@ def main():
                 print(f'  expanded url: {expanded_url}')
         exit(0)
 
-    if args.json:
-        status =api.get_status(args.json)
-        if status._json:
-            print(True)
-            if 'extended_entities' in status._json:
-                print('extended_entities')
-                if 'media' in status._json['extended_entities']:
-                    print('extended_entities.media')
-            if 'entities' in status._json:
-                print('entities')
-                if 'media' in status._json['entities']:
-                    print('entities.media')
-        else:
-            print(False)
-        exit(0)
-
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
@@ -66,12 +50,6 @@ def parse_arguments():
         type=int,
         metavar='TWEET_ID',
         help='specify tweet ID'
-    )
-    parser.add_argument(
-        '-j', '--json',
-        action='store',
-        type=int,
-        help='display json'
     )
     args = parser.parse_args()
     return args
