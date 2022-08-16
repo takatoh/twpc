@@ -1,4 +1,4 @@
-import tweety
+import tweepy
 
 
 class TweetedPhotoDownloader():
