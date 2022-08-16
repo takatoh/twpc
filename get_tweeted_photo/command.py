@@ -4,7 +4,7 @@ import os
 import requests
 import argparse
 from pprint import pprint
-from get_tweeted_photo import __version__
+from get_tweeted_photo import __version__, TweetedPhotoDownloader
 
 SCRIPT_VERSION = f'v{__version__}'
 CONFIG_FILE_NAME = '.tweepy_config.json'
@@ -15,38 +15,39 @@ def main():
 
     config = load_config()
 
-    auth = tweepy.OAuthHandler(config['consumer_key'], config['consumer_secret'])
-    auth.set_access_token(config['access_token_key'], config['access_token_secret'])
-    api = tweepy.API(auth)
+    downloader = TweetedPhotoDownloader(
+        config['consumer_key'],
+        config['consumer_secret'],
+        config['access_token_key'],
+        config['access_token_secret']
+    )
 
     if args.id:
-        status =api.get_status(args.id)
-        if 'extended_entities' in status._json and 'media' in status._json['extended_entities']:
-            entities = status._json['extended_entities']
-        elif 'entities' in status._json and 'media' in status._json['entities']:
-            entities = status._json['entities']
-        else:
+        result = downloader.get_by_id(args.id)
+        if result is None:
             print('No media')
             exit(0)
-        print(f'@{status.user.screen_name} at {status.created_at}(id={status.id})')
-        for media in entities['media']:
-            if media['type'] == 'photo':
-                media_url = media['media_url_https']
-                expanded_url = media['expanded_url']
-                print(f'  media url: {media_url}')
-                print(f'  expanded url: {expanded_url}')
-                if args.size:
-                    for k, v in media['sizes'].items():
-                        w = v['w']
-                        h = v['h']
-                        resize = v['resize']
-                        print(f'    {k}: {w}x{h} ({resize})')
-                if args.download:
-                    res = requests.get(media_url)
-                    os.makedirs(args.download, exist_ok=True)
-                    file_name = os.path.join(args.download, media_url.split('/')[-1])
-                    with open(file_name, 'wb') as f:
-                        f.write(res.content)
+        screen_name = result['screen_name']
+        created_at = result['created_at']
+        tweet_id = result['id']
+        print(f'@{screen_name} at {created_at}(id={tweet_id}')
+        for photo in result['photos']:
+            media_url = photo['media_url']
+            expanded_url = photo['expanded_url']
+            print(f'  media url: {media_url}')
+            print(f'  expanded url: {expanded_url}')
+            if args.size:
+                for k, v in photo['sizes'].items():
+                    w = v['w']
+                    h = v['h']
+                    resize = v['resize']
+                    print(f'    {k}: {w}x{h} ({resize})')
+            if args.download:
+                res = requests.get(media_url)
+                os.makedirs(args.download, exist_ok=True)
+                file_name = os.path.join(args.download, media_url.split('/')[-1])
+                with open(file_name, 'wb') as f:
+                    f.write(res.content)
         exit(0)
 
 
