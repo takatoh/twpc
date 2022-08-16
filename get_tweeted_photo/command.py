@@ -1,7 +1,5 @@
-import tweepy
 import json
 import os
-import requests
 import argparse
 from pprint import pprint
 from get_tweeted_photo import __version__, TweetedPhotoDownloader
