@@ -37,6 +37,7 @@ def main():
                 print(f'  expanded url: {expanded_url}')
                 if args.download:
                     res = requests.get(media_url)
+                    os.makedirs(args.download, exist_ok=True)
                     file_name = os.path.join(args.download, media_url.split('/')[-1])
                     with open(file_name, 'wb') as f:
                         f.write(res.content)
