@@ -27,9 +27,7 @@ def main():
         if result is None:
             print('No media')
             exit(0)
-        screen_name = result['screen_name']
-        created_at = result['created_at']
-        tweet_id = result['id']
+        screen_name, created_at, tweet_id = result['screen_name'], result['created_at'], result['id']
         print(f'@{screen_name} at {created_at}(id={tweet_id}')
         for photo in result['photos']:
             media_url = photo['media_url']
@@ -38,9 +36,7 @@ def main():
             print(f'  expanded url: {expanded_url}')
             if args.size:
                 for k, v in photo['sizes'].items():
-                    w = v['w']
-                    h = v['h']
-                    resize = v['resize']
+                    w, h, resize = v['w'], v['h'], v['resize']
                     print(f'    {k}: {w}x{h} ({resize})')
         if args.download:
             download_dir = args.download
