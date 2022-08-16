@@ -19,6 +19,19 @@ class TweetedPhotoDownloader():
         self.result = [tweet]
         return self.result
 
+    def get_by_username(self, user_name):
+        self.result = None
+        statuses = api.user_timeline(screen_name=user_name)
+        if statuses:
+            tweets = []
+            for status in statuses:
+                tweet = self._pick_out(status)
+                if tweet is not None:
+                    tweets.append(tweet)
+        if len(tweets) > 0:
+            self.result = tweets
+        return self.result
+
     def download_all(self, dir):
         count = 0
         for tweet in self.result:
