@@ -25,6 +25,7 @@ def main():
         if result is None:
             print('No media')
             exit(0)
+        result = result[0]
         screen_name, created_at, tweet_id = result['screen_name'], result['created_at'], result['id']
         print(f'@{screen_name} at {created_at}(id={tweet_id}')
         for photo in result['photos']:
