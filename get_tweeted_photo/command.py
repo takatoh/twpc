@@ -26,11 +26,12 @@ def main():
             print('No media')
             exit(0)
         print_tweet(result[0], args.size)
-        if args.download:
-            download_dir = args.download
-            os.makedirs(download_dir, exist_ok=True)
-            count = downloader.download_all(download_dir)
-            print(f'{count} photos downloaded')
+
+    if args.download:
+        download_dir = args.download
+        os.makedirs(download_dir, exist_ok=True)
+        count = downloader.download_all(download_dir)
+        print(f'{count} photos downloaded')
 
         exit(0)
 
