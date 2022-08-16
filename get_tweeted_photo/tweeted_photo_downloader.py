@@ -1,4 +1,6 @@
 import tweepy
+import requests
+import os
 
 
 class TweetedPhotoDownloader():
@@ -38,3 +40,14 @@ class TweetedPhotoDownloader():
                     'sizes' : sizes
                 })
         return self.result
+
+    def download_all(self, dir):
+        count = 0
+        for photo in self.result['photos']:
+            media_url = photo['media_url']
+            res = requests.get(media_url)
+            file_name = os.path.join(dir, media_url.split('/')[-1])
+            with open(file_name, 'wb') as f:
+                f.write(res.content)
+            count += 1
+        return count
