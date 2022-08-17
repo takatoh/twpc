@@ -37,7 +37,7 @@ def main():
         count = downloader.download_all(download_dir)
         print(f'{count} photos downloaded')
 
-        exit(0)
+    exit(0)
 
 
 def parse_arguments():
