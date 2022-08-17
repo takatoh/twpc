@@ -28,8 +28,11 @@ def main():
     if result is None:
         print('No media')
         exit(0)
-    for tweet in result:
-        print_tweet(tweet, args.size)
+    if args.dump:
+        dump_as_json(result)
+    else:
+        for tweet in result:
+            print_tweet(tweet, args.size)
 
     if args.download:
         download_dir = args.download
@@ -68,6 +71,11 @@ def parse_arguments():
         help='download photos into DIR'
     )
     parser.add_argument(
+        '-D', '--dump',
+        action='store_true',
+        help='dump as JSON'
+    )
+    parser.add_argument(
         '-s', '--size',
         action='store_true',
         help='display photo sizes'
@@ -94,3 +102,7 @@ def print_tweet(tweet, size=False):
             for k, v in photo['sizes'].items():
                 w, h, resize = v['w'], v['h'], v['resize']
                 print(f'    {k}: {w}x{h} ({resize})')
+
+
+def dump_as_json(tweets):
+    print(json.dumps(tweets, indent=2, ensure_ascii=False))
