@@ -24,6 +24,10 @@ def main():
         result = downloader.get_by_id(args.id)
     elif args.user:
         result = downloader.get_by_username(args.user)
+    elif args.user_list:
+        with open(args.user_list, 'r') as f:
+            user_list = [ u for u in [ l.strip() for l in f.readlines() ] if u ]
+        result = downloader.get_by_userlist(user_list)
 
     if result is None:
         print('No media')
@@ -69,6 +73,13 @@ def parse_arguments():
         action='store',
         default=None,
         help='specify user(screen_name)'
+    )
+    parser.add_argument(
+        '-U', '--user-list',
+        action='store',
+        metavar='FILE',
+        default=None,
+        help='read user list from FILE'
     )
     parser.add_argument(
         '-d', '--download',
