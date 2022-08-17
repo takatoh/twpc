@@ -22,17 +22,14 @@ def main():
 
     if args.id:
         result = downloader.get_by_id(args.id)
-        if result is None:
-            print('No media')
-            exit(0)
-        print_tweet(result[0], args.size)
     elif args.user:
         result = downloader.get_by_username(args.user)
-        if result is None:
-            print('No media')
-            exit(0)
-        for tweet in result:
-            print_tweet(tweet, args.size)
+
+    if result is None:
+        print('No media')
+        exit(0)
+    for tweet in result:
+        print_tweet(tweet, args.size)
 
     if args.download:
         download_dir = args.download
