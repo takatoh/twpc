@@ -28,14 +28,14 @@ def main():
     if result is None:
         print('No media')
         exit(0)
-    if args.output:
-        if os.path.exists(args.output):
-            with open(args.output, 'r') as f:
+    if args.log:
+        if os.path.exists(args.log):
+            with open(args.log, 'r') as f:
                 log = json.load(f)
         else:
             log = []
         log.extend(result)
-        with open(args.output, 'w') as f:
+        with open(args.log, 'w') as f:
             f.write(dump_as_json(log))
     elif args.dump:
         print(dump_as_json(result))
@@ -85,7 +85,7 @@ def parse_arguments():
         help='dump as JSON'
     )
     parser.add_argument(
-        '-o', '--output',
+        '-l', '--log',
         action='store',
         metavar='FILE',
         default=None,
