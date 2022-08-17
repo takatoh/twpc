@@ -21,7 +21,7 @@ class TweetedPhotoDownloader():
 
     def get_by_username(self, user_name):
         self.result = None
-        statuses = api.user_timeline(screen_name=user_name)
+        statuses = self._api.user_timeline(screen_name=user_name)
         if statuses:
             tweets = []
             for status in statuses:
