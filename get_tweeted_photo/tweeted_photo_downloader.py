@@ -40,7 +40,7 @@ class TweetedPhotoDownloader():
                 file_name = os.path.join(dir, media_url.split('/')[-1])
                 if os.path.exists(file_name):
                     continue
-                res = requests.get(media_url)
+                res = requests.get(media_url, params={ 'name' : 'large' })
                 with open(file_name, 'wb') as f:
                     f.write(res.content)
                 count += 1
