@@ -26,6 +26,13 @@ def main():
             print('No media')
             exit(0)
         print_tweet(result[0], args.size)
+    elif args.user:
+        result = downloader.get_by_username(args.user)
+        if result is None:
+            print('No media')
+            exit(0)
+        for tweet in result:
+            print_tweet(tweet, args.size)
 
     if args.download:
         download_dir = args.download
@@ -49,6 +56,12 @@ def parse_arguments():
         type=int,
         metavar='TWEET_ID',
         help='specify tweet ID'
+    )
+    parser.add_argument(
+        '-u', '--user',
+        action='store',
+        default=None,
+        help='specify user(screen_name)'
     )
     parser.add_argument(
         '-d', '--download',
