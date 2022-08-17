@@ -85,6 +85,7 @@ def load_config():
         config = json.load(f)
     return config
 
+
 def print_tweet(tweet, size=False):
     screen_name, created_at, tweet_id = tweet['screen_name'], tweet['created_at'], tweet['id']
     print(f'@{screen_name} at {created_at}(id={tweet_id}')
