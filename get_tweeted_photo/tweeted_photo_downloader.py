@@ -53,11 +53,14 @@ class TweetedPhotoDownloader():
             entities = status._json['entities']
         else:
             return None
+        photos = self._convert(entities)
+        if len(photos) == 0:
+            return None
         tweet = {
             'screen_name' : status.user.screen_name,
             'created_at' : status.created_at,
             'id' : status.id,
-            'photos' : self._convert(entities)
+            'photos' : photos
         }
         return tweet
 
