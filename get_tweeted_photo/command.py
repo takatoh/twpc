@@ -29,14 +29,9 @@ def main():
         print('No media')
         exit(0)
     if args.log:
-        if os.path.exists(args.log):
-            with open(args.log, 'r') as f:
-                log = json.load(f)
-        else:
-            log = []
+        log = open_log(args.log)
         log.extend(result)
-        with open(args.log, 'w') as f:
-            f.write(dump_as_json(log))
+        save_log(log, args.log)
     elif args.dump:
         print(dump_as_json(result))
     else:
@@ -122,3 +117,17 @@ def print_tweet(tweet, size=False):
 
 def dump_as_json(tweets):
     return json.dumps(tweets, indent=2, ensure_ascii=False, cls=JSONWithDateTimeEncoder)
+
+
+def open_log(logfile):
+    if os.path.exists(logfile):
+        with open(logfile, 'r') as f:
+            log = json.load(f)
+    else:
+        log = []
+    return log
+
+
+def save_log(log, logfile):
+    with open(logfile, 'w') as f:
+        f.write(dump_as_json(log))
