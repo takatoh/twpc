@@ -4,6 +4,7 @@ import argparse
 
 THUMBNAIL_DIR = 'thumbs'
 THUMBNAIL_GEOMETRY = (180, 180)
+IMAGE_SUFFIXES = ['.png', '.jpg', '.jpeg']
 
 
 def main():
@@ -15,7 +16,7 @@ def main():
 
     count = 0
     for src in src_dir.iterdir():
-        if not (src.is_file() and src.suffix in ['.png', '.jpg', '.jpeg']):
+        if not (src.is_file() and src.suffix in IMAGE_SUFFIXES):
             continue
         thumb = thumbs_dir / src.name
         if thumb.exists():
