@@ -21,6 +21,14 @@ tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)"
 tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "mypy (>=0.900,!=0.940)", "pytest-mypy-plugins", "cloudpickle"]
 
 [[package]]
+name = "bottle"
+version = "0.12.23"
+description = "Fast and simple WSGI-framework for small web-applications."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "colorama"
 version = "0.4.5"
 description = "Cross-platform colored terminal text."
@@ -122,11 +130,12 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "bc5c6e2a33a074ab2b5977e9ab0941181bdee3c52ecf3a4c3afdad03f6a5e5f8"
+content-hash = "aa5453a5051a15afc22101bec3f8426faba98042dfe77030b1e141674a220cfc"
 
 [metadata.files]
 atomicwrites = []
 attrs = []
+bottle = []
 colorama = []
 more-itertools = []
 packaging = []
