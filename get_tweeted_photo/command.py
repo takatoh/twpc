@@ -28,8 +28,17 @@ def main():
     if result is None:
         print('No media')
         exit(0)
-    if args.dump:
-        dump_as_json(result)
+    if args.output:
+        if os.path.exists(args.output):
+            with open(args.output, 'r') as f:
+                log = json.load(f)
+        else:
+            log = []
+        log.extend(result)
+        with open(args.output, 'w') as f:
+            f.write(dump_as_json(log))
+    elif args.dump:
+        print(dump_as_json(result))
     else:
         for tweet in result:
             print_tweet(tweet, args.size)
@@ -76,6 +85,13 @@ def parse_arguments():
         help='dump as JSON'
     )
     parser.add_argument(
+        '-o', '--output',
+        action='store',
+        metavar='FILE',
+        default=None,
+        help='output log as JSON to FILE'
+    )
+    parser.add_argument(
         '-s', '--size',
         action='store_true',
         help='display photo sizes'
@@ -105,4 +121,4 @@ def print_tweet(tweet, size=False):
 
 
 def dump_as_json(tweets):
-    print(json.dumps(tweets, indent=2, ensure_ascii=False, cls=JSONWithDateTimeEncoder))
+    return json.dumps(tweets, indent=2, ensure_ascii=False, cls=JSONWithDateTimeEncoder)
