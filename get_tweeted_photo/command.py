@@ -30,7 +30,10 @@ def main():
         exit(0)
     if args.log:
         log = open_log(args.log)
-        log.extend(result)
+        ids = [ t['id'] for t in log ]
+        for tweet in result:
+            if not tweet['id'] in ids:
+                log.append(tweet)
         save_log(log, args.log)
     elif args.dump:
         print(dump_as_json(result))
