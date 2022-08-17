@@ -37,8 +37,10 @@ class TweetedPhotoDownloader():
         for tweet in self.result:
             for photo in tweet['photos']:
                 media_url = photo['media_url']
-                res = requests.get(media_url)
                 file_name = os.path.join(dir, media_url.split('/')[-1])
+                if os.path.exists(file_name):
+                    continue
+                res = requests.get(media_url)
                 with open(file_name, 'wb') as f:
                     f.write(res.content)
                 count += 1
