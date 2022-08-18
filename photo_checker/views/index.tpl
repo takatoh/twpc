@@ -20,14 +20,16 @@
                                 <img src="/images/thumbs/{{ photo.name }}" class="img-thumbnail align-middle" />
                             </a>
                         </div>
-                        <div class="col-8" style="height: 200px;">
+                        <div class="col-8">
                             <h5>{{ photo.name }}</h5>
                             <p>
                                 {{ photo_info[photo.name]['media_url'] }}
                                 <span><a href="{{ photo_info[photo.name]['expanded_url'] }}" target="_blank">(link)</a></span>
                             </p>
-                            <button type="button" class="btn btn-outline-primary">Post</button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            <p>
+                                <button type="button" class="btn btn-outline-primary">Post</button>
+                                <button type="button" class="btn btn-outline-danger">Delete</button>
+                            </p>
                         </div>
                     </div>
                 </div>
