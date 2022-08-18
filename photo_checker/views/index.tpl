@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>INDEX - Photos</title>
-  </head>
-  <body>
-    <h1>INDEX - Photos</h1>
+    <head>
+        <meta charset="utf-8">
+        <title>INDEX - Photos</title>
+        <!-- Bootstrap CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <h1>INDEX - Photos</h1>
 
-    <div>
-        <ul>
+            <div class="row row-cols-2">
             % for photo in photo_list:
-            <li>
-                <figure>
-                    <a href="/images/{{ photo.name }}">
-                        <img src="/images/thumbs/{{ photo.name }}" />
-                    </a>
-                    <caption>{{ photo.name }}</caption>
-                </figure>
-            </li>
+                <div class="col border rounded bg-light" style="height: 210px;">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="/images/{{ photo.name }}">
+                                <img src="/images/thumbs/{{ photo.name }}" class="img-thumbnail align-middle" />
+                            </a>
+                        </div>
+                        <div class="col-8" style="height: 200px;">
+                            <p>{{ photo.name }}</p>
+                        </div>
+                    </div>
+                </div>
             % end
-        </ul>
-    </div>
-  </body>
+            </div>
+        </div>
+    </body>
 </html>
