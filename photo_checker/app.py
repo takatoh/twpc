@@ -1,5 +1,12 @@
 from bottle import route, run
 from pathlib import Path
+import os
+import json
+
+
+config_file = os.environ.get('HOME') + '/photo-checker-config.json'
+with open(config_file, 'r') as f:
+    CONFIG = json.load(f)
 
 
 @route('/hello')
@@ -9,7 +16,7 @@ def hello():
 
 @route('/photos')
 def photos():
-    photos = list_photo_files('/home/takatoh/w/photo-checker/photos')
+    photos = list_photo_files(CONFIG['photoDir'])
 #    return str(photos)
     html = '''<!DOCTYPE html>
 <html>
