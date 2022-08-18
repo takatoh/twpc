@@ -2,6 +2,7 @@ from bottle import route, view, static_file, run, TEMPLATE_PATH
 from pathlib import Path
 import os
 import json
+from photo_checker.photo_info_handler import PhotoInfoHandler
 
 
 config_file = os.environ.get('HOME') + '/photo-checker-config.json'
@@ -45,19 +46,6 @@ def list_photo_files(directory):
 
 
 def load_photo_info(info_file):
-    with open(info_file, 'r') as f:
-        src_info_list = json.load(f)
-    photo_info = {}
-    for src_info in src_info_list:
-        status_id = src_info['id']
-        created_at = src_info['created_at']
-        for photo in src_info['photos']:
-            file_name = photo['media_url'].split('/')[-1]
-            photo_info[file_name] = {
-                'file_name': file_name,
-                'status_id' : status_id,
-                'media_url' : photo['media_url'],
-                'expanded_url' : photo['expanded_url'],
-                'created_at' : created_at
-            }
+    handler = PhotoInfoHandler(info_file)
+    photo_info = handler.convert()
     return photo_info
