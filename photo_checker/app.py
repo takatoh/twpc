@@ -13,7 +13,8 @@ TEMPLATE_PATH.append(Path(__file__).parent / 'views')
 @route('/')
 @view('index')
 def index():
-    return dict(title='Photos')
+    photo_list = list_photo_files(CONFIG['photoDir'])
+    return dict(photo_list=photo_list)
 
 
 @route('/hello')
