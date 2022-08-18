@@ -15,7 +15,7 @@
             <div class="row row-cols-2">
             % for photo in photo_list:
                 <div class="col border rounded bg-light" style="height: 210px;">
-                    <div class="row">
+                    <div class="row" id="{{ photo.name }}">
                         <div class="col-4">
                             <a href="/images/{{ photo.name }}">
                                 <img src="/images/thumbs/{{ photo.name }}" class="img-thumbnail align-middle" />
