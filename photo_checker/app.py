@@ -34,3 +34,19 @@ def list_photo_files(directory):
             continue
         photo_files.append(file)
     return photo_files
+
+
+def load_photo_info(info_file):
+    src_info_list = json.load(info_file)
+    photo_info = {}
+    for src_info in src_info_list:
+        created_at = src_info['created_at']
+        for photo in src_info['photos']:
+            file_name = photo['media_url'].split('/')[-1]
+            photo_info[file_name] = {
+                'file_name': file_name,
+                'media_url' : photo['media_url'],
+                'expanded_url' : photo['expanded_url'],
+                'created_at' : created_at
+            }
+    return photo_info
