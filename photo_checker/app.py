@@ -38,7 +38,8 @@ def list_photo_files(directory):
 
 
 def load_photo_info(info_file):
-    src_info_list = json.load(info_file)
+    with open(info_file, 'r') as f:
+        src_info_list = json.load(f)
     photo_info = {}
     for src_info in src_info_list:
         created_at = src_info['created_at']
