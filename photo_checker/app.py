@@ -1,4 +1,4 @@
-from bottle import route, run
+from bottle import route, static_file, run
 from pathlib import Path
 import os
 import json
@@ -35,6 +35,11 @@ def photos():
 </html>
 '''
     return html
+
+
+@route('/images/<filepath:path>')
+def send_iamge(filepath):
+    return static_file(filepath, root=CONFIG['photoDir'])
 
 
 def run_server():
