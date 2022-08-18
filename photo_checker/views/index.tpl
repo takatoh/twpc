@@ -21,7 +21,7 @@
                             </a>
                         </div>
                         <div class="col-8" style="height: 200px;">
-                            <p>{{ photo.name }}</p>
+                            <h5>{{ photo.name }}</h5>
                             <p>
                                 {{ photo_info[photo.name]['media_url'] }}
                                 <span><a href="{{ photo_info[photo.name]['expanded_url'] }}" target="_blank">(link)</a></span>
