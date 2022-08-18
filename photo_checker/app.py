@@ -8,6 +8,7 @@ config_file = os.environ.get('HOME') + '/photo-checker-config.json'
 with open(config_file, 'r') as f:
     CONFIG = json.load(f)
 TEMPLATE_PATH.append(Path(__file__).parent / 'views')
+STATIC_FILE_DIR = str(Path(__file__).parent / 'static_files')
 
 
 @route('/')
@@ -22,6 +23,11 @@ def index():
 @route('/images/<filepath:path>')
 def send_iamge(filepath):
     return static_file(filepath, root=CONFIG['photoDir'])
+
+
+@route('/statics/<filepath:path>')
+def send_static_file(filepath):
+    return static_file(filepath, root=STATIC_FILE_DIR)
 
 
 def run_server():
