@@ -22,6 +22,10 @@
                         </div>
                         <div class="col-8" style="height: 200px;">
                             <p>{{ photo.name }}</p>
+                            <p>
+                                {{ photo_info[photo.name]['media_url'] }}
+                                <span><a href="{{ photo_info[photo.name]['expanded_url'] }}" target="_blank">(link)</a></span>
+                            </p>
                             <button type="button" class="btn btn-outline-primary">Post</button>
                             <button type="button" class="btn btn-outline-danger">Delete</button>
                         </div>
