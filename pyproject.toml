@@ -18,3 +18,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 mkthumbs = "photo_checker.make_thumbnails:main"
+serve = "photo_checker.app:run_server"
