@@ -1,4 +1,4 @@
-from bottle import route, view, static_file, run, TEMPLATE_PATH
+from bottle import route, redirect, view, static_file, run, TEMPLATE_PATH
 from pathlib import Path
 import os
 import json
@@ -31,6 +31,13 @@ def send_static_file(filepath):
     return static_file(filepath, root=STATIC_FILE_DIR)
 
 
+@route('/delete/<filename>')
+def delete_photo(filename):
+    delete_photo_file(filename, CONFIG['photoDir'])
+    delete_photo_info(filename, CONFIG['infoFile'])
+    return redirect('/')
+
+
 def run_server():
     run(host='localhost', port=8080, debug=True)
 
@@ -49,3 +56,14 @@ def load_photo_info(info_file):
     handler = PhotoInfoHandler(info_file)
     photo_info = handler.convert()
     return photo_info
+
+
+def delete_photo_file(filename, directory):
+    base_dir = Path(directory)
+    (base_dir / filename).unlink()
+    (base_dir / 'thumbs' / filename).unlink()
+
+
+def delete_photo_info(filename, info_file):
+    handler = PhotoInfoHandler(info_file)
+    handler.delete(filename)
