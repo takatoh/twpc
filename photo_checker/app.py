@@ -15,6 +15,7 @@ TEMPLATE_PATH.append(Path(__file__).parent / 'views')
 def index():
     photo_list = list_photo_files(CONFIG['photoDir'])
     photo_info = load_photo_info(CONFIG['infoFile'])
+    photo_list.sort(key=lambda itm: photo_info[itm.name]['status_id'])
     return dict(photo_list=photo_list, photo_info=photo_info)
 
 
@@ -42,11 +43,13 @@ def load_photo_info(info_file):
         src_info_list = json.load(f)
     photo_info = {}
     for src_info in src_info_list:
+        status_id = src_info['id']
         created_at = src_info['created_at']
         for photo in src_info['photos']:
             file_name = photo['media_url'].split('/')[-1]
             photo_info[file_name] = {
                 'file_name': file_name,
+                'status_id' : status_id,
                 'media_url' : photo['media_url'],
                 'expanded_url' : photo['expanded_url'],
                 'created_at' : created_at
