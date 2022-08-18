@@ -6,6 +6,7 @@
         <title>INDEX - Photos</title>
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="/statics/photochecker.js"></script>
     </head>
     <body>
         <div class="container">
@@ -28,7 +29,7 @@
                             </p>
                             <p>
                                 <button type="button" class="btn btn-outline-primary">Post</button>
-                                <button type="button" class="btn btn-outline-danger">Delete</button>
+                                <button type="button" class="btn btn-outline-danger delete-button">Delete</button>
                             </p>
                         </div>
                     </div>
@@ -36,5 +37,14 @@
             % end
             </div>
         </div>
+
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                const deleteButtons = document.getElementsByClassName("delete-button");
+                for (let i = 0; i < deleteButtons.length; i++) {
+                    deleteButtons[i].addEventListener("click", deletePhoto, false);
+                }
+            });
+        </script>
     </body>
 </html>
