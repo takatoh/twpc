@@ -1,3 +1,4 @@
 {
-    "photoDir" : "/path/to/photos"
+    "photoDir" : "/path/to/photos",
+    "infoFile" : "/path/to/info-file.json"
 }
