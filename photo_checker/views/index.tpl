@@ -14,11 +14,11 @@
 
             <div class="row row-cols-2">
             % for photo in photo_list:
-                <div class="col border rounded bg-light" style="height: 210px;">
+                <div class="col border bg-light p-1 my-2" style="height: 200px;">
                     <div class="row" id="{{ photo.name }}">
-                        <div class="col-4">
+                        <div class="col-4 d-flex align-items-center">
                             <a href="/images/{{ photo.name }}">
-                                <img src="/images/thumbs/{{ photo.name }}" class="img-thumbnail align-middle" />
+                                <img src="/images/thumbs/{{ photo.name }}" class="img-thumbnail" />
                             </a>
                         </div>
                         <div class="col-8">
