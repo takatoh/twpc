@@ -28,7 +28,7 @@
                                 <span><a href="{{ photo_info[photo.name]['expanded_url'] }}" target="_blank">(link)</a></span>
                             </p>
                             <p>
-                                <button type="button" class="btn btn-outline-primary">Post</button>
+                                <button type="button" class="btn btn-outline-primary post-button">Post</button>
                                 <button type="button" class="btn btn-outline-danger delete-button">Delete</button>
                             </p>
                         </div>
@@ -43,6 +43,10 @@
                 const deleteButtons = document.getElementsByClassName("delete-button");
                 for (let i = 0; i < deleteButtons.length; i++) {
                     deleteButtons[i].addEventListener("click", deletePhoto, false);
+                }
+                const postButtons = document.getElementsByClassName("post-button");
+                for (let i = 0; i < postButtons.length; i++) {
+                    postButtons[i].addEventListener("click", postPhoto, false);
                 }
             });
         </script>
