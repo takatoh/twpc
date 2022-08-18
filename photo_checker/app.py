@@ -1,4 +1,4 @@
-from bottle import route, static_file, run
+from bottle import route, view, static_file, run, TEMPLATE_PATH
 from pathlib import Path
 import os
 import json
@@ -7,6 +7,13 @@ import json
 config_file = os.environ.get('HOME') + '/photo-checker-config.json'
 with open(config_file, 'r') as f:
     CONFIG = json.load(f)
+TEMPLATE_PATH.append(Path(__file__).parent / 'views')
+
+
+@route('/')
+@view('index')
+def index():
+    return dict(title='Photos')
 
 
 @route('/hello')
