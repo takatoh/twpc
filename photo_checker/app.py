@@ -14,7 +14,8 @@ TEMPLATE_PATH.append(Path(__file__).parent / 'views')
 @view('index')
 def index():
     photo_list = list_photo_files(CONFIG['photoDir'])
-    return dict(photo_list=photo_list)
+    photo_info = load_photo_info(CONFIG['infoFile'])
+    return dict(photo_list=photo_list, photo_info=photo_info)
 
 
 @route('/images/<filepath:path>')
