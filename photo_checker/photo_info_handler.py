@@ -25,3 +25,19 @@ class PhotoInfoHandler():
     def _load(self):
         with open(self.info_file, 'r') as f:
             self.info_list = json.load(f)
+
+    def _save(self):
+        with open(self.info_file, 'w') as f:
+            json.dump(self.info_list, f, ensure_ascii=False, indent=2)
+
+    def delete(self, filename):
+        for info in self.info_list:
+            del_idx = -1
+            for i, photo in enumerate(info['photos']):
+                photo_file_name = photo['media'].split('/')[-1]
+                if filename == photo_file_name:
+                    del_idx = i
+                    break
+            if del_idx >= 0:
+                info['photos'].pop(del_idx)
+        self._save()
