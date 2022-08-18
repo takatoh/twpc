@@ -34,7 +34,7 @@ class PhotoInfoHandler():
         for info in self.info_list:
             del_idx = -1
             for i, photo in enumerate(info['photos']):
-                photo_file_name = photo['media'].split('/')[-1]
+                photo_file_name = photo['media_url'].split('/')[-1]
                 if filename == photo_file_name:
                     del_idx = i
                     break
