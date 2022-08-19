@@ -7,5 +7,6 @@ const deletePhoto = (event) => {
 
 const postPhoto = (event) => {
     const fileName = event.target.closest(".row").id;
-    alert("Post file: " + fileName + " ?");
+    alert("Post file: " + fileName + "\n Are you OK?");
+    window.location.href = '/post/' + fileName;
 };
