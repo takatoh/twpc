@@ -1,16 +1,21 @@
 from PIL import Image
 from pathlib import Path
+import json
+import os
 import argparse
 
 THUMBNAIL_DIR = 'thumbs'
 THUMBNAIL_GEOMETRY = (180, 180)
 IMAGE_SUFFIXES = ['.png', '.jpg', '.jpeg']
+config_file = os.environ.get('HOME') + '/photo-checker-config.json'
+with open(config_file, 'r') as f:
+    CONFIG = json.load(f)
 
 
 def main():
     args = parse_arguments()
 
-    src_dir = Path(args.dir)
+    src_dir = Path(args.dir or CONFIG['photoDir'])
     thumbs_dir = src_dir / THUMBNAIL_DIR
 
     count = make_thumbnails(src_dir, thumbs_dir, verbose=args.verbose)
@@ -24,7 +29,9 @@ def parse_arguments():
         'dir',
         action='store',
         metavar='DIR',
-        help='original image'
+        nargs='?',
+        default=None,
+        help='specify original photo DIR, or from configuration file'
     )
     parser.add_argument(
         '-v', '--verbose',
