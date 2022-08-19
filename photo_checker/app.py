@@ -1,4 +1,5 @@
 from bottle import route, redirect, view, static_file, run, TEMPLATE_PATH
+import requests
 from pathlib import Path
 import os
 import json
@@ -41,7 +42,27 @@ def delete_photo(filename):
 @route('/post/<filename>')
 @view('post_complete')
 def post_photo(filename):
-    return dict(status='Accepted', filename=filename)
+    filepath = Path(CONFIG['photoDir']) / filename
+    photo_info = load_photo_info(CONFIG['infoFile'])[filename]
+    src_url = photo_info['media_url'] + '?name=large'
+    data = {
+        'url' : src_url,
+        'page_url' : '',
+        'tags' : '',
+        'add_tags' : False
+    }
+    server_url = 'http://sombrero/api/post'
+    with open(filepath, 'rb') as f:
+        files = {
+            'file' : (filename, f)
+        }
+        res = requests.post(server_url, data=data, files=files)
+    if res.status_code == requests.codes.ok:
+        res_data = res.json()
+        status = res_data['status']
+    else:
+        status = 'Error: code = ' + str(res.status_code)
+    return dict(status=status, filename=filename)
 
 
 def run_server():
