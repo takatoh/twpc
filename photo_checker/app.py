@@ -38,6 +38,12 @@ def delete_photo(filename):
     return redirect('/')
 
 
+@route('/post/<filename>')
+@view('post_complete')
+def post_photo(filename):
+    return dict(status='Accepted', filename=filename)
+
+
 def run_server():
     run(host='localhost', port=8080, debug=True)
 
