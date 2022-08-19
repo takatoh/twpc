@@ -51,7 +51,7 @@ def post_photo(filename):
         'tags' : '',
         'add_tags' : False
     }
-    server_url = 'http://sombrero/api/post'
+    server_url = CONFIG['sombreroHostUrl'].rstrip('/') + '/api/post'
     with open(filepath, 'rb') as f:
         files = {
             'file' : (filename, f)
