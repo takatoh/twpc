@@ -60,9 +60,15 @@ def post_photo(filename):
     if res.status_code == requests.codes.ok:
         res_data = res.json()
         status = res_data['status']
+        if status == 'Accepted':
+            message = 'The file has been accepted.'
+        elif status == 'Rejected':
+            reason = res_data['reason']
+            message = f'The file has been rejected for the reason: {reason}.'
     else:
-        status = 'Error: code = ' + str(res.status_code)
-    return dict(status=status, filename=filename)
+        status = 'Error!'
+        message = f'Error occured: code = {res.status_code}'
+    return dict(status=status, message=message, filename=filename)
 
 
 def run_server():
