@@ -28,7 +28,7 @@
                             <p>
                                 <button type="button" class="btn btn-outline-danger delete-button">Delete</button>
                                 or
-                                <button type="button" class="btn btn-outline-secondary back-button">Back to Home</button>
+                                <button type="button" class="btn btn-outline-secondary back-button">Back to Index</button>
                             </p>
                         </div>
                     </div>
