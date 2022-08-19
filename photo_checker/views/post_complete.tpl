@@ -23,7 +23,7 @@
                         <div class="col-8">
                             <h5>{{ filename }}</h5>
                             <p>
-                                {{ filename }} has been {{ status }}.
+                                {{ message }}
                             </p>
                             <p>
                                 <button type="button" class="btn btn-outline-danger delete-button">Delete</button>
