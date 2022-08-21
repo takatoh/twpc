@@ -1,12 +1,20 @@
 const deletePhoto = (event) => {
     const fileName = event.target.closest(".row").id;
-    alert("Delete file: " + fileName + "\n Are you sure?");
-    window.location.href = '/delete/' + fileName;
+    const result = confirm("Delete file: " + fileName + "\n Are you sure?");
+    if (result) {
+        window.location.href = '/delete/' + fileName;
+    } else {
+        window.location.href = '/';
+    }
 };
 
 
 const postPhoto = (event) => {
     const fileName = event.target.closest(".row").id;
-    alert("Post file: " + fileName + "\n Are you OK?");
-    window.location.href = '/post/' + fileName;
+    const result = confirm("Post file: " + fileName + "\n Are you OK?");
+    if (result) {
+        window.location.href = '/post/' + fileName;
+    } else {
+        window.location.href = '/';
+    }
 };
