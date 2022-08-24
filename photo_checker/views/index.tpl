@@ -28,6 +28,9 @@
                                 <span><a href="{{ photo_info[photo.name]['expanded_url'] }}" target="_blank">(link)</a></span>
                             </p>
                             <p>
+                                @{{ photo_info[photo.name]['screen_name'] }}
+                            </p>
+                            <p>
                                 <button type="button" class="btn btn-outline-primary post-button">Post</button>
                                 <button type="button" class="btn btn-outline-danger delete-button">Delete</button>
                             </p>
