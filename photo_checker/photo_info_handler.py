@@ -11,6 +11,7 @@ class PhotoInfoHandler():
         for info in self.info_list:
             status_id = info['id']
             created_at = info['created_at']
+            screen_name = info['screen_name']
             for photo in info['photos']:
                 file_name = photo['media_url'].split('/')[-1]
                 photo_info[file_name] = {
@@ -18,7 +19,8 @@ class PhotoInfoHandler():
                     'status_id' : status_id,
                     'media_url' : photo['media_url'],
                     'expanded_url' : photo['expanded_url'],
-                    'created_at' : created_at
+                    'created_at' : created_at,
+                    'screen_name' : screen_name
                 }
         return photo_info
 
