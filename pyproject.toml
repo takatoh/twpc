@@ -7,6 +7,8 @@ authors = ["takatoh <takatoh.m@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 tweepy = "^4.10.0"
+Pillow = "^9.2.0"
+bottle = "^0.12.23"
 requests = "^2.28.1"
 
 [tool.poetry.dev-dependencies]
@@ -18,3 +20,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 gtwp = 'get_tweeted_photo.command:main'
+mkthumbs = "photo_checker.make_thumbnails:main"
+serve = "photo_checker.app:run_server"
