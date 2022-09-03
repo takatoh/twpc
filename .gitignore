@@ -1,0 +1,7 @@
+__pycache__/
+dist/
+*.jpg
+*.jpeg
+*.png
+*.json
+*.txt
