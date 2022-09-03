@@ -1,4 +1,8 @@
 {
+    "consumerKey": "YOUR CONSUMER KEY",
+    "consumerSecret": "YOUR CONSUMER SECRET",
+    "accessTokenKey": "YOUR ACCESS TOKEN KEY",
+    "accessTokenSecret": "YOUR ACCESS TOKEN SECRET",
     "photoDir" : "/path/to/photos",
     "infoFile" : "/path/to/info-file.json",
     "sombreroHostUrl" : "https://sombrero.example.com/"
