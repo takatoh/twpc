@@ -5,7 +5,7 @@ from pprint import pprint
 from get_tweeted_photo import __version__, TweetedPhotoDownloader, JSONWithDateTimeEncoder
 
 SCRIPT_VERSION = f'v{__version__}'
-CONFIG_FILE_NAME = '.tweepy_config.json'
+CONFIG_FILE_NAME = '.twpc-config.json'
 
 
 def main():
@@ -14,10 +14,10 @@ def main():
     config = load_config()
 
     downloader = TweetedPhotoDownloader(
-        config['consumer_key'],
-        config['consumer_secret'],
-        config['access_token_key'],
-        config['access_token_secret']
+        config['consumerKey'],
+        config['consumerSecret'],
+        config['accessTokenKey'],
+        config['accessTokenSecret']
     )
 
     if args.id:
