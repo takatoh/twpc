@@ -1,2 +1,2 @@
-from .tweeted_photo_downloader import TweetedPhotoDownloader
+from .downloader import Downloader
 from .json_with_datetime_encoder import JSONWithDateTimeEncoder
