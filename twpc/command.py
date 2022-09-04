@@ -1,11 +1,9 @@
-from . import __version__
+from . import __version__, CONFIG_FILE_NAME
 import os
 import json
 from pprint import pprint
 from .tweetedphoto import Downloader, JSONWithDateTimeEncoder
 import click
-
-CONFIG_FILE_NAME = '.twpc-config.json'
 
 
 def main():
