@@ -2,7 +2,7 @@ import json
 import os
 import argparse
 from pprint import pprint
-from get_tweeted_photo import __version__, TweetedPhotoDownloader, JSONWithDateTimeEncoder
+from . import __version__, TweetedPhotoDownloader, JSONWithDateTimeEncoder
 
 SCRIPT_VERSION = f'v{__version__}'
 CONFIG_FILE_NAME = '.twpc-config.json'
