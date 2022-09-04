@@ -1,4 +1,8 @@
 from . import __version__
+import os
+import json
+from pprint import pprint
+from .tweetedphoto import TweetedPhotoDownloader, JSONWithDateTimeEncoder
 import click
 
 CONFIG_FILE_NAME = '.twpc-config.json'
@@ -24,8 +28,7 @@ def cmd(ctx):
 @click.option('--dump', '-D', is_flag=True, help='dump as JSON')
 @click.option('--log', '-l', help='output log as JSON to FILE')
 @click.option('--size', '-s', is_flag=True, help='display photo sizes')
-@click.argument('input')
-def get(ctx, csv, tweet_id, user, user_list, download, dump, log, size):
+def get(ctx, tweet_id, user, user_list, download, dump, log, size):
     config = load_config()
 
     downloader = TweetedPhotoDownloader(
@@ -38,7 +41,7 @@ def get(ctx, csv, tweet_id, user, user_list, download, dump, log, size):
     if tweet_id:
         result = downloader.get_by_id(tweet_id)
     elif user:
-        result = downloader.get_by_username(user_name)
+        result = downloader.get_by_username(user)
     elif user_list:
         with open(user_list, 'r') as f:
             user_list = [ u for u in [ l.strip() for l in f.readlines() ] if u ]
@@ -47,14 +50,14 @@ def get(ctx, csv, tweet_id, user, user_list, download, dump, log, size):
     if result is None:
         print('No media')
         exit(0)
-    if args.log:
+    if log:
         log = open_log(log)
         ids = [ t['id'] for t in log ]
         for tweet in result:
             if not tweet['id'] in ids:
                 log.append(tweet)
         save_log(log, log)
-    elif args.dump:
+    elif dump:
         print(dump_as_json(result))
     else:
         for tweet in result:
