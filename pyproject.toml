@@ -21,4 +21,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 gtwp = 'twpc.tweetedphoto.command:main'
 mkthumbs = "twpc.photochecker.make_thumbnails:main"
-serve = "photo_checker.app:run_server"
+serve = "twpc.photochecker.app:run_server"
