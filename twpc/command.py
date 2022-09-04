@@ -2,7 +2,7 @@ from . import __version__
 import os
 import json
 from pprint import pprint
-from .tweetedphoto import TweetedPhotoDownloader, JSONWithDateTimeEncoder
+from .tweetedphoto import Downloader, JSONWithDateTimeEncoder
 import click
 
 CONFIG_FILE_NAME = '.twpc-config.json'
@@ -31,7 +31,7 @@ def cmd(ctx):
 def get(ctx, tweet_id, user, user_list, download, dump, log, size):
     config = load_config()
 
-    downloader = TweetedPhotoDownloader(
+    downloader = Downloader(
         config['consumerKey'],
         config['consumerSecret'],
         config['accessTokenKey'],
