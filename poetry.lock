@@ -48,10 +48,21 @@ python-versions = ">=3.6.0"
 unicode_backport = ["unicodedata2"]
 
 [[package]]
+name = "click"
+version = "8.1.3"
+description = "Composable command line interface toolkit"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[[package]]
 name = "colorama"
 version = "0.4.5"
 description = "Cross-platform colored terminal text."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -235,7 +246,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "fcf2a27d55a88bb8d0b179bc0c1bc95835a0bff31ae7e7c32159679f402e4d72"
+content-hash = "d07f95055e4abb076584c999a962dd3940a4c1d06118d65a931474d9d36ae79e"
 
 [metadata.files]
 atomicwrites = []
@@ -243,6 +254,7 @@ attrs = []
 bottle = []
 certifi = []
 charset-normalizer = []
+click = []
 colorama = []
 idna = [
     {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
