@@ -7,7 +7,7 @@ import argparse
 THUMBNAIL_DIR = 'thumbs'
 THUMBNAIL_GEOMETRY = (180, 180)
 IMAGE_SUFFIXES = ['.png', '.jpg', '.jpeg']
-config_file = os.environ.get('HOME') + '/photo-checker-config.json'
+config_file = os.environ.get('HOME') + '/.twpc-config.json'
 with open(config_file, 'r') as f:
     CONFIG = json.load(f)
 
