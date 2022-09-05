@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from pprint import pprint
 from .tweetedphoto import Downloader, JSONWithDateTimeEncoder
-from .photochecker.make_thumbnails import make_thumbnail, make_thumbnails, THUMBNAIL_DIR
+from .photochecker.thumbnail import make_thumbnail, make_thumbnails, THUMBNAIL_DIR
 import click
 
 
