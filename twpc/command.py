@@ -1,8 +1,10 @@
 from . import __version__, CONFIG_FILE_NAME
 import os
 import json
+from pathlib import Path
 from pprint import pprint
 from .tweetedphoto import Downloader, JSONWithDateTimeEncoder
+from .photochecker.make_thumbnails import make_thumbnail, make_thumbnails, THUMBNAIL_DIR
 import click
 
 
@@ -69,6 +71,19 @@ def get(ctx, tweet_id, user, user_list, download, dump, log, size):
 
     exit(0)
 
+
+@cmd.command(help='Make thumbnails.')
+@click.pass_context
+@click.option('--verbose', '-v', is_flag=True, help='verbose mode.')
+@click.argument('dir')
+def mkthumbs(ctx, verbose, dir):
+    config = load_config()
+    src_dir = Path(dir or config['photoDir'])
+    thumbs_dir = src_dir / THUMBNAIL_DIR
+
+    count = make_thumbnails(src_dir, thumbs_dir, verbose=verbose)
+    if verbose:
+        print(f'\n{count} thumbnails are made.')
 
 
 def load_config():
