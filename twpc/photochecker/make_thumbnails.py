@@ -7,39 +7,6 @@ import argparse
 THUMBNAIL_DIR = 'thumbs'
 THUMBNAIL_GEOMETRY = (180, 180)
 IMAGE_SUFFIXES = ['.png', '.jpg', '.jpeg']
-config_file = os.environ.get('HOME') + '/.twpc-config.json'
-with open(config_file, 'r') as f:
-    CONFIG = json.load(f)
-
-
-def main():
-    args = parse_arguments()
-
-    src_dir = Path(args.dir or CONFIG['photoDir'])
-    thumbs_dir = src_dir / THUMBNAIL_DIR
-
-    count = make_thumbnails(src_dir, thumbs_dir, verbose=args.verbose)
-    if args.verbose:
-        print(f'\n{count} thumbnails are made')
-
-
-def parse_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        'dir',
-        action='store',
-        metavar='DIR',
-        nargs='?',
-        default=None,
-        help='specify original photo DIR, or from configuration file'
-    )
-    parser.add_argument(
-        '-v', '--verbose',
-        action='store_true',
-        help='verbose mode'
-    )
-    args = parser.parse_args()
-    return args
 
 
 def make_thumbnails(src_dir, thumbs_dir, verbose=False):
