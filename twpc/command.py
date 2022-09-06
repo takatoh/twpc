@@ -26,9 +26,9 @@ def cmd(ctx):
 @click.option('--user-list', '-U', help='read user list from FILE.')
 @click.option('--download', '-d', help='download photos into DIR.')
 @click.option('--dump', '-D', is_flag=True, help='dump as JSON.')
-@click.option('--log', '-l', help='output log as JSON to FILE.')
+@click.option('--log', '-l', 'logfile', help='output log as JSON to FILE.')
 @click.option('--size', '-s', is_flag=True, help='display photo sizes.')
-def get(ctx, tweet_id, user, user_list, download, dump, log, size):
+def get(ctx, tweet_id, user, user_list, download, dump, logfile, size):
     config = load_config()
 
     downloader = Downloader(
@@ -50,13 +50,13 @@ def get(ctx, tweet_id, user, user_list, download, dump, log, size):
     if result is None:
         print('No media')
         exit(0)
-    if log:
-        log = open_log(log)
+    if logfile:
+        log = open_log(logfile)
         ids = [ t['id'] for t in log ]
         for tweet in result:
             if not tweet['id'] in ids:
                 log.append(tweet)
-        save_log(log, log)
+        save_log(log, logfile)
     elif dump:
         print(dump_as_json(result))
     else:
