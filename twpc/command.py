@@ -5,6 +5,7 @@ from pathlib import Path
 from pprint import pprint
 from .tweetedphoto import Downloader, JSONWithDateTimeEncoder
 from .photochecker.thumbnail import make_thumbnail, make_thumbnails, THUMBNAIL_DIR
+from .photochecker.app import run_server
 import click
 
 
@@ -84,6 +85,12 @@ def mkthumbs(ctx, verbose, dir):
     count = make_thumbnails(src_dir, thumbs_dir, verbose=verbose)
     if verbose:
         print(f'\n{count} thumbnails are made.')
+
+
+@cmd.command(help='Run server.')
+@click.pass_context
+def serve(ctx):
+    run_server()
 
 
 def load_config():
