@@ -20,5 +20,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-serve = "twpc.photochecker.app:run_server"
 twpc = 'twpc.command:main'
