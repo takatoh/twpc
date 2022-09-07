@@ -22,13 +22,13 @@ def cmd(ctx):
 
 @cmd.command(help='Get tweeted photos.')
 @click.pass_context
-@click.option('--id', '-i', 'tweet_id', type=int, help='specify tweet ID.')
-@click.option('--user', '-u', help='specify user(screen_name).')
-@click.option('--user-list', '-U', help='read user list from FILE.')
-@click.option('--download', '-d', help='download photos into DIR.')
-@click.option('--dump', '-D', is_flag=True, help='dump as JSON.')
-@click.option('--log', '-l', 'logfile', help='output log as JSON to FILE.')
-@click.option('--size', '-s', is_flag=True, help='display photo sizes.')
+@click.option('--id', '-i', 'tweet_id', type=int, metavar='ID', help='Specify tweet ID.')
+@click.option('--user', '-u', metavar='SCREEN_NAME', help='Specify user (screen_name).')
+@click.option('--user-list', '-U', metavar='FILE', help='Read user list from FILE.')
+@click.option('--download', '-d', metavar='DIR', help='Download photos into DIR.')
+@click.option('--dump', '-D', is_flag=True, help='Dump as JSON.')
+@click.option('--log', '-l', 'logfile', metavar='FILE', help='Output log as JSON to FILE.')
+@click.option('--size', '-s', is_flag=True, help='Display photo sizes.')
 def get(ctx, tweet_id, user, user_list, download, dump, logfile, size):
     config = load_config()
 
