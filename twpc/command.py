@@ -70,8 +70,6 @@ def get(ctx, tweet_id, user, user_list, download, dump, logfile, size):
         count = downloader.download_all(download_dir)
         print(f'{count} photos downloaded')
 
-    exit(0)
-
 
 @cmd.command(help='Make thumbnails.')
 @click.pass_context
