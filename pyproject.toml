@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "twpc"
-version = "0.5.0"
+version = "0.7.0"
 description = ""
 authors = ["takatoh <takatoh.m@gmail.com>"]
 
