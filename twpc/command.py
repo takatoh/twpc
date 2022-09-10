@@ -87,12 +87,13 @@ def mkthumbs(ctx, verbose, dir):
 
 @cmd.command(help='Run server.')
 @click.pass_context
-def serve(ctx):
+@click.option('--port', '-p', type=int, default=8080, help='specify port.')
+def serve(ctx, port):
     config = load_config()
     src_dir = Path(config['photoDir'])
     thumbs_dir = src_dir / THUMBNAIL_DIR
     count = make_thumbnails(src_dir, thumbs_dir)
-    run_server()
+    run_server(port=port)
 
 
 def load_config():

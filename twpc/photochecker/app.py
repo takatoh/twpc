@@ -72,8 +72,8 @@ def post_photo(filename):
     return dict(status=status, message=message, filename=filename)
 
 
-def run_server():
-    run(host='localhost', port=8080, debug=True)
+def run_server(port=8080):
+    run(host='localhost', port=port, debug=True)
 
 
 def list_photo_files(directory):
