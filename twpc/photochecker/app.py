@@ -3,13 +3,11 @@ import requests
 from pathlib import Path
 import os
 import json
-from . import CONFIG_FILE_NAME
+from twpc import load_config
 from .photo_info_handler import PhotoInfoHandler
 
 
-config_file = Path(os.environ.get('HOME')) / CONFIG_FILE_NAME
-with open(config_file, 'r') as f:
-    CONFIG = json.load(f)
+CONFIG = load_config()
 TEMPLATE_PATH.append(Path(__file__).parent / 'views')
 STATIC_FILE_DIR = str(Path(__file__).parent / 'static_files')
 
