@@ -1,4 +1,4 @@
-from . import __version__, CONFIG_FILE_NAME
+from . import __version__, CONFIG_FILE_NAME, load_config
 import os
 import json
 from pathlib import Path
@@ -94,13 +94,6 @@ def serve(ctx, port):
     thumbs_dir = src_dir / THUMBNAIL_DIR
     count = make_thumbnails(src_dir, thumbs_dir)
     run_server(port=port)
-
-
-def load_config():
-    config_file = os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
-    with open(config_file, 'r') as f:
-        config = json.load(f)
-    return config
 
 
 def print_tweet(tweet, size=False):
