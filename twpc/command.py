@@ -92,6 +92,7 @@ def serve(ctx, port):
     config = load_config()
     src_dir = Path(config['photoDir'])
     thumbs_dir = src_dir / THUMBNAIL_DIR
+    print('Making thumbnails...')
     count = make_thumbnails(src_dir, thumbs_dir)
     run_server(port=port)
 
