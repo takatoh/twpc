@@ -79,6 +79,18 @@ def serve(ctx, port):
     run_server(port=port)
 
 
+@cmd.command(help='Handle user list.')
+@click.pass_context
+@click.option('--list', '-l', is_flag=True, help='List users.')
+def user(ctx, list):
+    config = load_config()
+    with open(config['userList'], 'r') as f:
+        user_list = [ u for u in [ l.strip() for l in f.readlines() ] if u ]
+    if list:
+        for user in user_list:
+            print(user)
+
+
 def print_tweet(tweet, size=False):
     screen_name, created_at, tweet_id = tweet['screen_name'], tweet['created_at'], tweet['id']
     print(f'@{screen_name} at {created_at}(id={tweet_id}')
