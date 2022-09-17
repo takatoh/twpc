@@ -83,7 +83,8 @@ def serve(ctx, port):
 @click.pass_context
 @click.option('--list', '-l', is_flag=True, help='List users.')
 @click.option('--add', '-a', metavar='USER', help='Add user')
-def user(ctx, list, add):
+@click.option('--remove', '-r', metavar='USER', help='Remove user')
+def user(ctx, list, add, remove):
     config = load_config()
     with open(config['userList'], 'r') as f:
         user_list = [ u for u in [ l.strip() for l in f.readlines() ] if u ]
@@ -100,6 +101,16 @@ def user(ctx, list, add):
             with open(config['userList'], 'w') as f:
                 f.write('\n'.join(user_list))
             print(f'Added user: {user}')
+    elif remove:
+        user = remove.strip('@')
+        if not user in user_list:
+            print(f'User not exist: {user}')
+            exit(0)
+        else:
+            user_list.remove(user)
+            with open(config['userList'], 'w') as f:
+                f.write('\n'.join(user_list))
+            print(f'Removed user: {user}')
 
 
 def print_tweet(tweet, size=False):
