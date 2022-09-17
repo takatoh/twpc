@@ -5,5 +5,6 @@
     "accessTokenSecret": "YOUR ACCESS TOKEN SECRET",
     "photoDir" : "/path/to/photos",
     "infoFile" : "/path/to/info-file.json",
+    "userList" : "/path/to/userlist",
     "sombreroHostUrl" : "https://sombrero.example.com/"
 }
