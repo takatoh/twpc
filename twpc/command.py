@@ -6,6 +6,7 @@ from pprint import pprint
 from .tweetedphoto import Downloader, JSONWithDateTimeEncoder
 from .photochecker.thumbnail import make_thumbnail, make_thumbnails, THUMBNAIL_DIR
 from .photochecker.app import run_server
+from .user_list_handler import UserListHandler, UserExist, UserNotFound
 import click
 
 
@@ -86,31 +87,24 @@ def serve(ctx, port):
 @click.option('--remove', '-r', metavar='USER', help='Remove user')
 def user(ctx, list, add, remove):
     config = load_config()
+    handler = UserListHandler(config['userList'])
     with open(config['userList'], 'r') as f:
         user_list = [ u for u in [ l.strip() for l in f.readlines() ] if u ]
     if list:
-        for user in user_list:
+        for user in handler.list:
             print(user)
     elif add:
-        user = add.strip('@')
-        if user in user_list:
-            print(f'Already exist: {user}')
-            exit(0)
-        else:
-            user_list.append(user)
-            with open(config['userList'], 'w') as f:
-                f.write('\n'.join(user_list))
+        try:
+            user = handler.add(add)
             print(f'Added user: {user}')
+        except UserExist as e:
+            print(f'Already exist: {e}')
     elif remove:
-        user = remove.strip('@')
-        if not user in user_list:
-            print(f'User not exist: {user}')
-            exit(0)
-        else:
-            user_list.remove(user)
-            with open(config['userList'], 'w') as f:
-                f.write('\n'.join(user_list))
+        try:
+            user = handler.remove(remove)
             print(f'Removed user: {user}')
+        except UserNotFound as e:
+            print(f'Not exist: {e}')
 
 
 def print_tweet(tweet, size=False):
