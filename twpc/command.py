@@ -41,17 +41,15 @@ def get(ctx):
         print('No media')
         exit(0)
 
-    logfile = confi['infoFile']
+    logfile = config['infoFile']
     log = open_log(logfile)
     ids = [ t['id'] for t in log ]
-    for tweet in result:
-        if not tweet['id'] in ids:
-            log.append(tweet)
-    save_log(log, logfile)
+    tweets = [ tweet for tweet in result if not tweet['id'] in ids ]
+    save_log(log.extend(tweets), logfile)
 
     download_dir = config['photoDir']
     os.makedirs(download_dir, exist_ok=True)
-    count = downloader.download_all(download_dir)
+    count = downloader.download(download_dir, tweets)
     print(f'{count} photos downloaded')
 
 
