@@ -74,10 +74,9 @@ def get(ctx, tweet_id, user, user_list, download, dump, logfile, size):
 @cmd.command(help='Make thumbnails.')
 @click.pass_context
 @click.option('--verbose', '-v', is_flag=True, help='Verbose mode.')
-@click.argument('dir')
-def mkthumbs(ctx, verbose, dir):
+def mkthumbs(ctx, verbose):
     config = load_config()
-    src_dir = Path(dir or config['photoDir'])
+    src_dir = Path(config['photoDir'])
     thumbs_dir = src_dir / THUMBNAIL_DIR
 
     count = make_thumbnails(src_dir, thumbs_dir, verbose=verbose)
