@@ -45,7 +45,8 @@ def get(ctx):
     log = open_log(logfile)
     ids = [ t['id'] for t in log ]
     tweets = [ tweet for tweet in result if not tweet['id'] in ids ]
-    save_log(log.extend(tweets), logfile)
+    log.extend(tweets)
+    save_log(log, logfile)
 
     download_dir = config['photoDir']
     os.makedirs(download_dir, exist_ok=True)
