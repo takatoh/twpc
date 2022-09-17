@@ -22,9 +22,8 @@ def cmd(ctx):
 
 @cmd.command(help='Get tweeted photos.')
 @click.pass_context
-@click.option('--download', '-d', metavar='DIR', help='Download photos into DIR.')
 @click.option('--size', '-s', is_flag=True, help='Display photo sizes.')
-def get(ctx, download, size):
+def get(ctx, size):
     config = load_config()
 
     downloader = Downloader(
@@ -50,11 +49,10 @@ def get(ctx, download, size):
             log.append(tweet)
     save_log(log, logfile)
 
-    if download:
-        download_dir = download
-        os.makedirs(download_dir, exist_ok=True)
-        count = downloader.download_all(download_dir)
-        print(f'{count} photos downloaded')
+    download_dir = config['photoDir']
+    os.makedirs(download_dir, exist_ok=True)
+    count = downloader.download_all(download_dir)
+    print(f'{count} photos downloaded')
 
 
 @cmd.command(help='Make thumbnails.')
