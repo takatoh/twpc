@@ -82,13 +82,24 @@ def serve(ctx, port):
 @cmd.command(help='Handle user list.')
 @click.pass_context
 @click.option('--list', '-l', is_flag=True, help='List users.')
-def user(ctx, list):
+@click.option('--add', '-a', metavar='USER', help='Add user')
+def user(ctx, list, add):
     config = load_config()
     with open(config['userList'], 'r') as f:
         user_list = [ u for u in [ l.strip() for l in f.readlines() ] if u ]
     if list:
         for user in user_list:
             print(user)
+    elif add:
+        user = add.strip('@')
+        if user in user_list:
+            print(f'Already exist: {user}')
+            exit(0)
+        else:
+            user_list.append(user)
+            with open(config['userList'], 'w') as f:
+                f.write('\n'.join(user_list))
+            print(f'Added user: {user}')
 
 
 def print_tweet(tweet, size=False):
