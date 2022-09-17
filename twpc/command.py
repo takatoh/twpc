@@ -23,10 +23,9 @@ def cmd(ctx):
 @cmd.command(help='Get tweeted photos.')
 @click.pass_context
 @click.option('--download', '-d', metavar='DIR', help='Download photos into DIR.')
-@click.option('--dump', '-D', is_flag=True, help='Dump as JSON.')
 @click.option('--log', '-l', 'logfile', metavar='FILE', help='Output log as JSON to FILE.')
 @click.option('--size', '-s', is_flag=True, help='Display photo sizes.')
-def get(ctx, download, dump, logfile, size):
+def get(ctx, download, logfile, size):
     config = load_config()
 
     downloader = Downloader(
@@ -51,8 +50,6 @@ def get(ctx, download, dump, logfile, size):
             if not tweet['id'] in ids:
                 log.append(tweet)
         save_log(log, logfile)
-    elif dump:
-        print(dump_as_json(result))
     else:
         for tweet in result:
             print_tweet(tweet, size)
