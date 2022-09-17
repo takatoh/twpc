@@ -60,6 +60,21 @@ class Downloader():
                 count += 1
         return count
 
+    def download(self, dir, tweets=None):
+        count = 0
+        tweets = tweets or self.result
+        for tweet in tweets:
+            for photo in tweet['photos']:
+                media_url = photo['media_url']
+                file_name = os.path.join(dir, media_url.split('/')[-1])
+                if os.path.exists(file_name):
+                    continue
+                res = requests.get(media_url, params={ 'name' : 'large' })
+                with open(file_name, 'wb') as f:
+                    f.write(res.content)
+                count += 1
+        return count
+
     def _pick_out(self, status):
         if 'extended_entities' in status._json and 'media' in status._json['extended_entities']:
             entities = status._json['extended_entities']
