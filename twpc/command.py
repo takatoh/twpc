@@ -22,8 +22,7 @@ def cmd(ctx):
 
 @cmd.command(help='Get tweeted photos.')
 @click.pass_context
-@click.option('--size', '-s', is_flag=True, help='Display photo sizes.')
-def get(ctx, size):
+def get(ctx):
     config = load_config()
 
     downloader = Downloader(
