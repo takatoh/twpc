@@ -40,6 +40,7 @@ def get(ctx):
     if result is None:
         print('No media')
         exit(0)
+
     logfile = confi['infoFile']
     log = open_log(logfile)
     ids = [ t['id'] for t in log ]
