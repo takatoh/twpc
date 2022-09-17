@@ -83,8 +83,8 @@ def serve(ctx, port):
 @cmd.command(help='Handle user list.')
 @click.pass_context
 @click.option('--list', '-l', is_flag=True, help='List users.')
-@click.option('--add', '-a', metavar='USER', help='Add user')
-@click.option('--remove', '-r', metavar='USER', help='Remove user')
+@click.option('--add', '-a', metavar='USER', help='Add user.')
+@click.option('--remove', '-r', metavar='USER', help='Remove user.')
 def user(ctx, list, add, remove):
     config = load_config()
     handler = UserListHandler(config['userList'])
