@@ -2,7 +2,7 @@ import os
 import json
 
 
-__version__ = '0.9.0'
+__version__ = '0.9.1'
 
 CONFIG_FILE_NAME = '.twpc-config.json'
 
