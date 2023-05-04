@@ -7,6 +7,7 @@ from twpc import load_config
 from .photo_info_handler import PhotoInfoHandler
 
 
+DEFAULT_PORT = 8080
 CONFIG = load_config()
 TEMPLATE_PATH.append(Path(__file__).parent / 'views')
 STATIC_FILE_DIR = str(Path(__file__).parent / 'static_files')
@@ -72,7 +73,7 @@ def post_photo(filename):
     return dict(status=status, message=message, filename=filename)
 
 
-def run_server(port=8080):
+def run_server(port=DEFAULT_PORT):
     run(host='localhost', port=port, debug=True)
 
 
