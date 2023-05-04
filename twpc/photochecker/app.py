@@ -19,7 +19,8 @@ def index():
     photo_info = load_photo_info(CONFIG['infoFile'])
     photo_list = [ photo for photo in photo_list if str(photo.name) in photo_info ]
     photo_list.sort(key=lambda itm: photo_info[itm.name]['status_id'])
-    return dict(photo_list=photo_list, photo_info=photo_info)
+    photo_count = len(photo_list)
+    return dict(photo_list=photo_list, photo_info=photo_info, photo_count=photo_count)
 
 
 @route('/images/<filepath:path>')
