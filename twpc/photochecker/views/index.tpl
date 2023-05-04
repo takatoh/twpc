@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>INDEX - Photos</h1>
+            <h1>INDEX - {{ photo_count }} Photos</h1>
 
             <div class="row row-cols-2">
             % for photo in photo_list:
